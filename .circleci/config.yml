@@ -11,10 +11,16 @@ jobs:
             image: ubuntu-1604:201903-01 
     
     steps:
+      - restore_cache:
+        keys:
+         # when lock file changes, use increasingly general patterns to restore cache
+          - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+          - maven-repo-v1-{{ .Branch }}-
+          - maven-repo-v1-
       - save_cache:
           key: my-cache
           paths:
-            - test/example.js
+            - cache/
   #cache:
    # steps:
     #  - restore_cache:
