@@ -9,7 +9,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: ./mvn test
+      - run: mvn test
 
   build:
     docker:
@@ -19,7 +19,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: ./mvn -Dmaven.test.skip=true package
+      - run: mvn -Dmaven.test.skip=true package
 
 workflows:
   version: 2
