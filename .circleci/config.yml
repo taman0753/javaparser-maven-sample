@@ -7,17 +7,26 @@ version: 2.1
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   cache:
+    machine: # executor type
+            image: ubuntu-1604:201903-01 
+    
     steps:
-      - restore_cache:
-        keys:
-         # when lock file changes, use increasingly general patterns to restore cache
-         - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
-         - maven-repo-v1-{{ .Branch }}-
-         - maven-repo-v1-
       - save_cache:
-         paths:
-         - ~/.m2
-         key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+          key: my-cache
+          paths:
+            - test/example.js
+  #cache:
+   # steps:
+    #  - restore_cache:
+     #   keys:
+         # when lock file changes, use increasingly general patterns to restore cache
+      #   - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+       #  - maven-repo-v1-{{ .Branch }}-
+        # - maven-repo-v1-
+      #- save_cache:
+       #  paths:
+        # - ~/.m2
+         #key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
   build-and-test:
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
